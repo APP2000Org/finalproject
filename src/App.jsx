@@ -11,7 +11,7 @@ import Grid from '@material-ui/core/Grid';
 class App extends Component{
 
 state = {
-  innloggetBrukerInfo: [true,"Chris",5], //Infoen som lagres om en innlogget bruker. Er false dersom ikke innlogget. 
+  innloggetBrukerInfo: [false,"",0], //Infoen som lagres om en innlogget bruker. Er false dersom ikke innlogget. 
 text: "",
 respons: "",
 eventer: [],
@@ -47,7 +47,7 @@ componentDidUpdate(prevProps, prevState) {
 hentPåmeldtListe = (funksjonsnavn, tabell, kollonen, verdien, where) => {
   axios({
     method: 'get',
-    url: 'http://localhost/basic.php', 
+    url: 'https://boeventsphp.000webhostapp.com/index.php', 
   params: { 
     funksjonsnavn, 
     tabell,
@@ -80,7 +80,7 @@ if(this.state.kriterieListe[0] != '')
 søkeFeltSøk = (funksjonsnavn, tabell, kollonen, verdien, where) => {
   axios({
     method: 'get',
-    url: 'http://localhost/basic.php', 
+    url: 'https://boeventsphp.000webhostapp.com/index.php', 
   params: { 
     funksjonsnavn, 
     tabell,
@@ -99,7 +99,7 @@ this.setState({eventer: res.data});
 skrivUtAlt = (funksjonsnavn, tabell, kollonen, verdien,where) => {
   axios({
     method: 'get',
-    url: 'http://localhost/basic.php',  //https://boeventsphp.000webhostapp.com/index.php
+    url: 'https://boeventsphp.000webhostapp.com/index.php',  
   params: { 
     funksjonsnavn, 
     tabell,
