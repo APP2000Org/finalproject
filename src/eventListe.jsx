@@ -68,7 +68,7 @@ export default function EventListe(props) {
           component="img"
           alt="Contemplative Reptile"
           height="140"
-          image = {props.frontBilde}
+          image = "/iconer/fest.png"//{props.frontBilde}
           title="Contemplative Reptile"
         />
         <CardContent>

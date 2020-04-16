@@ -4,9 +4,8 @@ import EventListe from './eventListe.jsx';
 import axios from 'axios';
 import ButtonAppBar from './NavigasjonBar.jsx'
 import Grid from '@material-ui/core/Grid';
-//import Hoved from './GoogleMaps/hoved.jsx';
-//import Maps from './GoogleMaps/maps.js';
-//import style from './GoogleMaps/maps.js';
+import Maps from './GoogleMaps/maps.jsx';
+
 
 class App extends Component{
 
@@ -185,6 +184,10 @@ søkeListe = {this.settKriterieListe.bind(this)}
 kriterieListe = {this.state.kriterieListe}
 /> 
 
+<Maps
+//Denne tabellen sendes fra App til maps. Og kan brukes ved å skrive props. Oppdaterer seg automatisk i forhold til hva som skjer i app.
+tabell = {this.state.eventer}
+/>
 
   <Button onClick={this.testKlikk.bind(this)}>TestKnapp</Button>
      <h1 style={{textAlign:"center"}}>Kommende Eventer {this.state.innlogget}</h1>

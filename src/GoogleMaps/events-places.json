@@ -1,0 +1,85 @@
+{
+    "features": [
+      {
+        "eventID": 1,
+        "lat": 59.415326,
+        "lng": 9.0672,
+        "info": "Dusjparty",
+        "bilde": "gunner",
+        "txt": "Blahblahblahblah Blahblahblahblah Blahblahblahblah Blahblahblahblah Blahblahblahblah Blahblahblahblah Blahblahblahblah Blahblahblahblah Blahblahblahblah Blahblahblahblah Blahblahblahblah Blahblahblahblah Blahblahblahblah Blahblahblahblah Blahblahblahblah",
+        "genre": "fest",
+        "link": "https://www.deviantart.com/flygonfan"
+      },
+      {
+        "eventID": 2,
+        "lat": 59.413121,
+        "lng": 9.072562,
+        "info": "Bursdag",
+        "bilde": "Trashmaid",
+        "txt": "yippity yappety yippity yappety yippity yappety yippity yappety yippity yappety yippity yappety yippity yappety yippity yappety yippity yappety yippity yappety yippity yappety yippity yappety yippity yappety yippity yappety yippity yappety yippity yappety",
+        "genre": "dugnad",
+        "link": "https://www.deviantart.com/flygonfan"
+      },
+      {
+        "eventID": 3,
+        "lat": 59.415608,
+        "lng": 9.089288,
+        "info": "Konsert",
+        "bilde": "gunner",
+        "txt": "general corporal lietenant soldier army war general corporal lietenant soldier army war general corporal lietenant soldier army war general corporal lietenant soldier army war general corporal lietenant soldier army war general corporal lietenant soldier army war general corporal lietenant soldier army war ",
+        "genre": "musikk",
+        "link": "https://www.deviantart.com/flygonfan"
+      },
+      {
+        "eventID": 4,
+        "lat": 59.432101,
+        "lng": 9.044892,
+        "info": "Gaming",
+        "bilde": "gunner",
+        "txt": "beep boop beep boop beep boop beep boop beep boop beep boop beep boop beep boop beep boop beep boop beep boop beep boop beep boop beep boop beep boop beep boop beep boop beep boop beep boop beep boop beep boop beep boop beep boop beep boop beep boop beep boop beep boop beep boop",
+        "genre": "videospill",
+        "link": "https://www.deviantart.com/flygonfan"
+      },
+      {
+        "eventID": 5,
+        "lat": 59.401337,
+        "lng": 9.073015,
+        "info": "Band Audition",
+        "bilde": "Trashmaid",
+        "txt": "tinker tanker tonker tinker tanker tonker tinker tanker tonker tinker tanker tonker tinker tanker tonker tinker tanker tonker tinker tanker tonker tinker tanker tonker tinker tanker tonker tinker tanker tonker tinker tanker tonker tinker tanker tonker tinker tanker tonker",
+        "genre": "musikk",
+        "link": "https://www.deviantart.com/flygonfan"
+      },
+      {
+        "eventID": 6,
+        "lat": 59.411337,
+        "lng": 9.08015,
+        "info": "Sjakklubb",
+        "bilde": "gunner",
+        "txt": "tinker tanker tonker tinker tanker tonker tinker tanker tonker tinker tanker tonker tinker tanker tonker tinker tanker tonker tinker tanker tonker tinker tanker tonker tinker tanker tonker tinker tanker tonker tinker tanker tonker tinker tanker tonker tinker tanker tonker",
+        "genre": "brettspill",
+        "link": "https://www.deviantart.com/flygonfan"
+      },
+      {
+        "eventID": 7,
+        "lat": 59.431337,
+        "lng": 9.08915,
+        "info": "Hjelp, jeg sliter med innleveringen",
+        "bilde": "gunner",
+        "txt": "... --- ...   ... --- ...   ... --- ...   ... --- ...   ... --- ...   ... --- ...   ... --- ...   ... --- ...   ... --- ...   ... --- ...   ... --- ...   ... --- ...   ... --- ...   ... --- ...   ... --- ...   ... --- ...",
+        "genre": "studie",
+        "link": "https://www.deviantart.com/flygonfan"
+      },
+      {
+        "eventID": 8,
+        "lat": 59.43037,
+        "lng": 9.08615,
+        "info": "Voldball i bingn gutta!! Nåska de spelles",
+        "bilde": "gunner",
+        "txt": "Det er snø og is i binga sa da spilles det røft",
+        "genre": "sport",
+        "link": "https://www.deviantart.com/flygonfan"
+      }
+    ]
+  }
+  
