@@ -69,7 +69,6 @@ const MapWrapped = withScriptjs(withGoogleMap(Map));
 export default function Maps(props) {
   //Her hentes tabellen fra App og skrives ut her inne i maps. Du kan bruke denne tabellen som du vil.  
   //Dersom eventer-tabellen i App endres, så vil eventer tabellen oppdateres automatisk her inne i maps. 
-  console.log(props.tabell); 
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
 

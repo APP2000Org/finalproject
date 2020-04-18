@@ -5,7 +5,8 @@ import axios from 'axios';
 import ButtonAppBar from './NavigasjonBar.jsx'
 import Grid from '@material-ui/core/Grid';
 import Maps from './GoogleMaps/maps.jsx';
-
+import MenuTabs from './popUp/MenuTabs.jsx';
+import ProfilSide from './popUp/ProfilSide.jsx';
 
 class App extends Component{
 
@@ -29,7 +30,8 @@ this.søkeFeltSøk('søkFeltSkriv','','',this.state.søkeTeksten,alleKriterier);
   }
 
 testKlikk = () =>{
-  this.hentPåmeldtListe('søkEtter','påmeldte','Brukere_Bnr',this.state.innloggetBrukerInfo[2],''); 
+  //this.hentPåmeldtListe('søkEtter','påmeldte','Brukere_Bnr',this.state.innloggetBrukerInfo[2],''); 
+  console.log(this.state.innloggetBrukerInfo);
 }
 
 componentDidUpdate(prevProps, prevState) {
@@ -39,7 +41,7 @@ componentDidUpdate(prevProps, prevState) {
   }
 
   if (prevState.innloggetBrukerInfo !== this.state.innloggetBrukerInfo) {
-   //GJØR NOE INNI HER NÅR brukerInfo er oppdatert. FOREKS NÅR BRUKER HAR LOGGET INN
+  //NOE KAN SKJER HER ETTER AT BRUKER HAR LOGGET INN
   }
 }
 
@@ -114,6 +116,7 @@ this.setState({eventer: res.data});
   .catch(err => console.error(err))
 };
 
+/*
 sjekkOmInnlogget = ()=> {
   axios({
     method: 'get',
@@ -127,13 +130,21 @@ console.log(res);
 })
   .catch(err => console.error(err))
 };
-
+*/
 handleSøk = (søkeTekst) => {
   this.setState({søkeTeksten:søkeTekst});
 
   let alleKriterier = this.omgjørTilSql(); 
 
   this.søkeFeltSøk('søkFeltSkriv','','',søkeTekst,alleKriterier);
+}
+
+loggInn = (brukerTabell) =>{
+  this.setState({innloggetBrukerInfo:brukerTabell})
+}
+
+loggUt = () =>{
+  this.setState({innloggetBrukerInfo:[false,"",0]});
 }
 
 componentDidMount = e => {
@@ -176,6 +187,8 @@ renderArray2 = () =>{
     return(
 <div>
 <ButtonAppBar
+loggInnFunksjon={this.loggInn}
+loggUt={this.loggUt}
 innlogget = {this.state.innloggetBrukerInfo[0]}
 BrukerNavn= {this.state.innloggetBrukerInfo[1]}
 Bnr = {this.state.innloggetBrukerInfo[2]}

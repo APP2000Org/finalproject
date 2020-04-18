@@ -1,17 +1,10 @@
 
 import React from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import NativeSelect from '@material-ui/core/NativeSelect';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import InputBase from '@material-ui/core/InputBase';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 
@@ -57,7 +50,7 @@ export default function Søkevalg(props) {
   let kriterieListe = props.kriterieListe;  
 
     function handleButtonClick(navn) {
-  if(navn == 'fjern'){
+  if(navn === 'fjern'){
   
     kriterieListe = ['','',''];
          
@@ -71,9 +64,9 @@ export default function Søkevalg(props) {
 
 var index =-1; 
 
-  if(e.target.name == 'dato')
+  if(e.target.name === 'dato')
     index = 0;
-  else if(e.target.name == 'by')
+  else if(e.target.name === 'by')
   index = 1;
   else index = 2;
 

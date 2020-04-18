@@ -11,7 +11,7 @@ state = {
 fornavn: "",
 passord: "",
 brukerInfo: [],
-respons: ""
+respons: "",
 }
 /*
 sjekkOmInnlogget = ()=> {
@@ -28,37 +28,41 @@ console.log("Dette er sjekk innlogging: " + res.data);
   .catch(err => console.error(err))
 };
   */
+
+  sendTilApp = (tabell) =>{
+   this.props.loggInnFunksjon(tabell); 
+  }
+
 loggInn = (e) => {
   e.preventDefault(); 
-  console.log("TRykt!");
-  /*
-  axios.defaults.withCredentials = true;
+  
       axios({
         method: 'get',
-        url:'http://localhost/loggInn.php',
+        url:"https://boeventsphp.000webhostapp.com/loggInn.php",
         params: {
           brukernavn:"'" + this.state.fornavn + "'",
-          passord: "'" + this.state.passord +"'"
+          passord: this.state.passord
         }
       }) 
     .then(res =>{
-      
       this.setState({brukerInfo:res.data});
       if(this.state.brukerInfo[0]==true){
       this.setState({respons:"Du har blitt logget inn"}); 
-      console.log(res);
-      this.sjekkOmInnlogget();
+      console.log(res); 
+      this.sendTilApp(this.state.brukerInfo);
+     // this.sjekkOmInnlogget();
       //window.location.reload(false);
 
-      }else {this.setState({respons: "Brukernavn eller passord er feil!"})
-      
+      }else {
+        this.setState({respons: "Brukernavn eller passord er feil!"})
+      console.log(this.state.brukerInfo);
     }; 
      
   })
     .catch(err => {
         this.setState({respons:"Noe gikk feil! Kontakt administrator!" })
         console.error(err)})
-        */
+        
   };
 
 

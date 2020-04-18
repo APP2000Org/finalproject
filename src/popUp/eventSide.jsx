@@ -23,7 +23,7 @@ class eventSide extends Component {
     hentPåmeldtListe = (funksjonsnavn, tabell, kollonen, verdien, where) => {
         axios({
           method: 'get',
-          url: 'http://localhost/basic.php', 
+          url: "https://boeventsphp.000webhostapp.com/index.php", 
         params: { 
           funksjonsnavn, 
           tabell,
@@ -34,9 +34,9 @@ class eventSide extends Component {
        timeout: 5000
       })
         .then(res =>{
-            if(where==0)
+            if(where===0)
             this.setState({påmeldtListe: res.data}); 
-            if(where==1)
+            if(where===1)
             console.log(res.data);
       })
         .catch(err => console.error(err))
@@ -44,10 +44,10 @@ class eventSide extends Component {
       
 
       meldPå = () =>{
-          if(this.state.innloggetBruker[0] ==true){
+          if(this.state.innloggetBruker[0] ===true){
         var puttSammen = "'" + this.state.info[0]+ "'";
           var verdien =  this.state.innloggetBruker[2]+ "," + this.state.info[0]; 
-          this.hentPåmeldtListe('settInnRad','påmeldte','',verdien,1);
+          this.hentPåmeldtListe('settInnRad','påmeldte','Brukere_Bnr,Arrangement_ENr',verdien,1);
           this.hentPåmeldtListe('søkEtter','påmeldte','Arrangement_ENr',puttSammen,0);
           }
       }

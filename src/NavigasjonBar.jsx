@@ -11,6 +11,7 @@ import Grid from '@material-ui/core/Grid';
 import Dialog from '@material-ui/core/Dialog';
 import Søkevalg from './popUp/Søkevalg.jsx';
 import ProfilSide from './popUp/ProfilSide.jsx';
+import MenuTabs from './popUp/MenuTabs.jsx';
 
 
 const useStyles = makeStyles(theme => ({
@@ -89,6 +90,9 @@ export default function ButtonAppBar(props) {
     setOpen(false);
   };
 
+  const loggin = <LogIn 
+  loggInnFunksjon = {props.loggInnFunksjon}/>;
+
   function UserField(props) {
     const erInnlogget = props.erInnlogget;
   
@@ -106,7 +110,7 @@ export default function ButtonAppBar(props) {
     return <AlertDialog
     beskrivelse="Logg inn"
     enVariant='text'
-  innhold = {<LogIn/>}
+  innhold = {loggin}
   />;
   }
 
@@ -148,8 +152,21 @@ export default function ButtonAppBar(props) {
     aria-labelledby="alert-dialog-title"
     aria-describedby="alert-dialog-description"
   >
-   <ProfilSide/>
+    <ProfilSide
+innloggetBrukerInfo = {[props.innlogget,props.BrukerNavn,props.Bnr]}
+  loggUt = {props.loggUt}
+  close = {handleClose}
+  />
   </Dialog>
     </div>
   );
 }
+/*
+<ProfilSide 
+   loggUt = {props.loggUt}
+   close = {handleClose}
+   innlogget = {props.innlogget}
+BrukerNavn= {props.BrukerNavn}
+Bnr = {props.Bnr}
+/>
+*/
