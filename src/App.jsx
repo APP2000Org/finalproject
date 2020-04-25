@@ -4,14 +4,14 @@ import EventListe from './eventListe.jsx';
 import axios from 'axios';
 import ButtonAppBar from './NavigasjonBar.jsx'
 import Grid from '@material-ui/core/Grid';
-import Maps from './GoogleMaps/maps.jsx';
+import Maps from './GoogleMaps/Maps.jsx';
 import MenuTabs from './popUp/MenuTabs.jsx';
 import ProfilSide from './popUp/ProfilSide.jsx';
 
 class App extends Component{
 
 state = {
-  innloggetBrukerInfo: [false,"",0], //Infoen som lagres om en innlogget bruker. Er false dersom ikke innlogget. 
+  innloggetBrukerInfo: [true,"Chris",5], //Infoen som lagres om en innlogget bruker. Er false dersom ikke innlogget. 
 text: "",
 respons: "",
 eventer: [],
@@ -31,7 +31,7 @@ this.søkeFeltSøk('søkFeltSkriv','','',this.state.søkeTeksten,alleKriterier);
 
 testKlikk = () =>{
   //this.hentPåmeldtListe('søkEtter','påmeldte','Brukere_Bnr',this.state.innloggetBrukerInfo[2],''); 
-  console.log(this.state.innloggetBrukerInfo);
+  console.log(this.state.eventer);
 }
 
 componentDidUpdate(prevProps, prevState) {
@@ -200,6 +200,7 @@ kriterieListe = {this.state.kriterieListe}
 <Maps
 //Denne tabellen sendes fra App til maps. Og kan brukes ved å skrive props. Oppdaterer seg automatisk i forhold til hva som skjer i app.
 tabell = {this.state.eventer}
+innloggetBruker = {this.state.innloggetBrukerInfo}
 />
 
   <Button onClick={this.testKlikk.bind(this)}>TestKnapp</Button>

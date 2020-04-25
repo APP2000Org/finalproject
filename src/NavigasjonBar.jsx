@@ -11,7 +11,7 @@ import Grid from '@material-ui/core/Grid';
 import Dialog from '@material-ui/core/Dialog';
 import Søkevalg from './popUp/Søkevalg.jsx';
 import ProfilSide from './popUp/ProfilSide.jsx';
-import MenuTabs from './popUp/MenuTabs.jsx';
+
 
 
 const useStyles = makeStyles(theme => ({

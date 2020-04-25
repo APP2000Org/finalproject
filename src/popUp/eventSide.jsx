@@ -3,7 +3,7 @@ import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
-class eventSide extends Component {
+class EventSide extends Component {
     state = {
         info: this.props.info,
         påmeldtListe: [],
@@ -15,10 +15,9 @@ class eventSide extends Component {
         this.hentPåmeldtListe('søkEtter','påmeldte','Arrangement_ENr',puttSammen,0)
     }
 
-    componentDidUpdate = e=>{
-
+    try = () =>{
+      console.log(this.state.info[0]);
     }
-
 
     hentPåmeldtListe = (funksjonsnavn, tabell, kollonen, verdien, where) => {
         axios({
@@ -36,6 +35,7 @@ class eventSide extends Component {
         .then(res =>{
             if(where===0)
             this.setState({påmeldtListe: res.data}); 
+
             if(where===1)
             console.log(res.data);
       })
@@ -85,8 +85,9 @@ class eventSide extends Component {
  
     render() { 
         return ( <div>
-            <p>Her skal det ligge info om eventSide</p>
+            <p>{this.state.info[3]}</p>
             
+           <Button onClick={this.try}>test</Button> 
             <this.ConditionalButton/>
             <p>Bruker-Nummer til folk som er påmeldt: </p>
             {this.mapPåmeldtListe()}
@@ -96,4 +97,4 @@ class eventSide extends Component {
     }
 }
  
-export default eventSide;
+export default EventSide;

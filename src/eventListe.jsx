@@ -9,7 +9,7 @@ import Badge from "@material-ui/core/Badge";
 import Typography from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
 import GroupIcon from '@material-ui/icons/Group';
-import EventSide from './popUp/eventSide.jsx';
+import EventSide from './popUp/EventSide.jsx';
 
 
 /*
@@ -36,7 +36,7 @@ function påmeldtKnapp(){
   //if()
 }
 
-function handleClick(){
+function handleChange(){
   alert("Dette er en test"); 
   console.log("Dette er inni bli med click");
 }
@@ -53,7 +53,7 @@ export default function EventListe(props) {
     setOpen(false);
   };
 
-  const eventInfo = [props.Enr,,props.lagetAv, props.sted,props.tittel,props.dato,props.tilDato,props.adresse,props.klokkeslett,props.beskrivelse,
+  const eventInfo = [props.Enr,props.lagetAv, props.sted,props.tittel,props.dato,props.tilDato,props.adresse,props.klokkeslett,props.beskrivelse,
   props.frontBilde,props.antPåmeldte];
 
 

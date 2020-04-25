@@ -59,6 +59,9 @@ export default function MenuTabs(props) {
     if(newValue == 2){
       props.skiftTilPåmeldt(); 
     }
+    if (newValue == 3) {
+     props.skiftTilVenner();
+    }
   };
 
   return (
@@ -81,7 +84,7 @@ export default function MenuTabs(props) {
         {props.påmeldteEvents}
       </TabPanel>
       <TabPanel value={value} index={3}>
-        Mine venner :
+      {props.venner}
       </TabPanel>
     </div>
   );
