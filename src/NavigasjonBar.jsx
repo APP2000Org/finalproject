@@ -60,7 +60,8 @@ const useStyles = makeStyles(theme => ({
   brukerBlokk: {
     "&:hover": {
       backgroundColor: fade(theme.palette.common.white, 0.25) //Får den til å endre farge ved hover
-    }
+    },
+    width:"auto"
   },
 }));
 
@@ -126,6 +127,7 @@ export default function ButtonAppBar(props) {
          søkeListe = {props.søkeListe}
          kriterieListe = {props.kriterieListe}
           />
+            
           <div className={classes.search}>
           <InputBase 
               placeholder="Søk eventer"
@@ -156,6 +158,7 @@ export default function ButtonAppBar(props) {
 innloggetBrukerInfo = {[props.innlogget,props.BrukerNavn,props.Bnr]}
   loggUt = {props.loggUt}
   close = {handleClose}
+  eierInfo={props.Bnr}
   />
   </Dialog>
     </div>

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import SimpleModal from './List.js';
+
 
 class EventSide extends Component {
     state = {
@@ -82,10 +84,9 @@ class EventSide extends Component {
           })} </Grid>)
         }else return (<p>Ingen er påmeldt enda!</p>); 
       };
- 
-    render() { 
-        return ( <div>
-            <p>{this.state.info[3]}</p>
+
+      /*
+      <p>{this.state.info[3]}</p>
             
            <Button onClick={this.try}>test</Button> 
             <this.ConditionalButton/>
@@ -93,6 +94,16 @@ class EventSide extends Component {
             {this.mapPåmeldtListe()}
             <p>Bruker som leser: </p>
             {this.state.innloggetBruker[2]}
+      */
+ 
+    render() { 
+        return ( <div>
+           <SimpleModal
+           Enr = {this.state.info[0]}
+           innloggetBruker = {this.state.innloggetBruker}
+           onClose={this.props.onClose}
+           loggUt={this.props.loggUt}
+           /> 
         </div> );
     }
 }

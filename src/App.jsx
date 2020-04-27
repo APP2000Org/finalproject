@@ -112,6 +112,7 @@ skrivUtAlt = (funksjonsnavn, tabell, kollonen, verdien,where) => {
 })
   .then(res =>{
 this.setState({eventer: res.data}); 
+console.log(res.data);
 })
   .catch(err => console.error(err))
 };
@@ -174,6 +175,7 @@ renderArray2 = () =>{
         frontBilde = {item.frontBildeAdresse}
         antPåmeldte = {item.antallPåmeldte}
         innloggetBruker = {this.state.innloggetBrukerInfo}
+        loggUt={this.loggUt}
         />
       </Grid>
         )

@@ -69,9 +69,9 @@ export default function MenuTabs(props) {
       <AppBar position="static">
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="Generell Info" {...a11yProps(0)} />
-          <Tab label="Dine events" {...a11yProps(1)} />
+          <Tab label="Lagde events" {...a11yProps(1)} />
           <Tab label="Påmeldt" {...a11yProps(2)} />
-          <Tab label="Mine venner" {...a11yProps(3)} />
+          <Tab label="Venner" {...a11yProps(3)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>

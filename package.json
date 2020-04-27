@@ -13,7 +13,9 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-google-maps": "^9.4.5",
-    "react-scripts": "3.3.0"
+    "react-scripts": "3.3.0",
+    "react-window": "^1.8.5",
+    "reactjs-popup": "^1.5.0"
   },
   "scripts": {
     "start": "react-scripts start",

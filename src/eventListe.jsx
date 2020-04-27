@@ -101,7 +101,9 @@ export default function EventListe(props) {
   >
    <EventSide
    innloggetBruker={props.innloggetBruker}
-   info = {eventInfo}/>
+   info = {eventInfo}
+   onClose={handleClose}
+   loggUt={props.loggUt}/>
   </Dialog>
   </div>
   );

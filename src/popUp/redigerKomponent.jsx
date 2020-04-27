@@ -83,9 +83,6 @@ class RedigerKomponent extends Component {
                       }}label ="Klokkeslett" name = "klokkeslett"  value={this.state.klokkeslett} onChange={this.handleFormChange} /><br/>
             <label value="Beskrivelse" >Beskrivelse<br/><TextareaAutosize name="beskrivelse" value={this.state.beskrivelse} rowsMin={4} onChange={this.handleFormChange}/></label><br/>
             <label value="Kategori">Kategori<br/><select label="Kategori" name="kategori" defaultValue={this.state.kategori} onChange={this.handleFormChange}>
-            <option key="Natur"value="Natur">
-             Natur
-            </option>
             <option key="Underholdning"value="Underholdning">
              Underholdning
              </option>

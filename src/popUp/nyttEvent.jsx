@@ -30,7 +30,7 @@ params.append('Kategori', this.state.kategori);
 params.append('TilDato', this.state.tilDato);
 params.append('Adresse', this.state.adresse);
 params.append('Klokkeslett', this.state.klokkeslett);
-    axios.post('http://localhost/nyEvent.php', params) 
+    axios.post('https://boeventsphp.000webhostapp.com/nyEvent.php', params) 
     .then(res =>{
       if(res.data===""){
       this.setState({respons:"Event har blitt registrert!"}); 
