@@ -42,7 +42,7 @@ componentDidUpdate(prevProps, prevState) {
 hentPåmeldtListe = (funksjonsnavn, tabell, kollonen, verdien, where) => {
   axios({
     method: 'get',
-    url: 'https://boeventsphp.000webhostapp.com/index.php', 
+    url: 'https://boeventer.no/index.php',
   params: { 
     funksjonsnavn, 
     tabell,
@@ -77,7 +77,7 @@ if(this.state.kriterieListe[0] !== '')
 søkeFeltSøk = (funksjonsnavn, tabell, kollonen, verdien, where) => {
   axios({
     method: 'get',
-    url: 'https://boeventsphp.000webhostapp.com/index.php', 
+    url: 'https://boeventer.no/index.php',
   params: { 
     funksjonsnavn, 
     tabell,
@@ -96,7 +96,7 @@ this.setState({eventer: res.data});
 skrivUtAlt = (funksjonsnavn, tabell, kollonen, verdien,where) => {
   axios({
     method: 'get',
-    url: 'https://boeventsphp.000webhostapp.com/index.php',  
+    url: 'https://boeventer.no/index.php',
   params: { 
     funksjonsnavn, 
     tabell,
@@ -116,7 +116,7 @@ this.setState({eventer: res.data});
 sjekkOmInnlogget = ()=> {
   axios({
     method: 'get',
-    url: 'https://boeventsphp.000webhostapp.com/sessionSjekk.php', 
+    url: 'https://boeventer.no/sessionSjekk.php',
  timeout: 5000
 })
   .then(res =>{
