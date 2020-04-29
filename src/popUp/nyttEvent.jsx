@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*Av Magnus Anfinnsen - 225259
 Og Patrick S. Lorentzen - 151685
 Bilde opplastnings mulighet Laget av Sondre Reinholdtsen StudNr:225274
@@ -5,16 +6,26 @@ Her kan man lage ett helt nytt event og poste den ut på siden.
 Vi bruker Google maps API for å la bruker velge addresse. Denne adressens kordinater blir lagret*/ 
 
 
+=======
+>>>>>>> 245ba99c9dde9cbe5be062ae4cb7d7d5c2dcd135
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+<<<<<<< HEAD
 import { compose, withProps, lifecycle } from "recompose";
 import { withGoogleMap, withScriptjs, GoogleMap, Marker } from 'react-google-maps';
 import SearchBox from "react-google-maps/lib/components/places/SearchBox";
 
 
+=======
+
+
+
+
+/*Bilde opplastnings mulighet Laget av Sondre Reinholdtsen StudNr:225274*/ 
+>>>>>>> 245ba99c9dde9cbe5be062ae4cb7d7d5c2dcd135
 
 export default class NyttEvent extends Component {
   state = {
@@ -25,6 +36,7 @@ export default class NyttEvent extends Component {
     tilDato: "",
     beskrivelse: "",
     kategori: "",
+<<<<<<< HEAD
     klokkeslett: "",
     respons: "",
 
@@ -166,6 +178,16 @@ export default class NyttEvent extends Component {
   registrerEvent = (e) => {
     e.preventDefault();
     
+=======
+    selectedFile: null,
+    adresse: "",
+    klokkeslett: "",
+    respons: "",
+  };
+
+  registrerEvent = (e) => {
+    e.preventDefault();
+>>>>>>> 245ba99c9dde9cbe5be062ae4cb7d7d5c2dcd135
     const params = new FormData();
     params.append("sted", this.state.sted);
     params.append("bnr", this.state.profil_nr);
@@ -173,6 +195,7 @@ export default class NyttEvent extends Component {
     params.append("FraDato", this.state.fraDato);
     params.append("Beskrivelse", this.state.beskrivelse);
     params.append("Kategori", this.state.kategori);
+<<<<<<< HEAD
     //params.append(
    //   "frontBildeAdresse",
    //   this.state.selectedFile,
@@ -189,6 +212,24 @@ export default class NyttEvent extends Component {
           this.setState({ respons: "Event har blitt registrert!" });
         } else this.setState({ respons: "Feil informasjon fylt ut!" });
         
+=======
+    params.append(
+      "frontBildeAdresse",
+      this.state.selectedFile,
+      this.state.selectedFile.name
+    );
+    params.append("TilDato", this.state.tilDato);
+    params.append("Adresse", this.state.adresse);
+    params.append("Klokkeslett", this.state.klokkeslett);
+    axios
+      .post("https://boeventsphp.000webhostapp.com/nyEvent.php", params)
+      .then((res) => {
+        console.log(this.state.selectedFile);
+        if (res.data === "") {
+          this.setState({ respons: "Event har blitt registrert!" });
+        } else this.setState({ respons: "Feil informasjon fylt ut!" });
+        console.log(res);
+>>>>>>> 245ba99c9dde9cbe5be062ae4cb7d7d5c2dcd135
       })
       .catch((err) => {
         this.setState({ respons: "Noe gikk feil! Kontakt administrator!" });
@@ -197,12 +238,16 @@ export default class NyttEvent extends Component {
 
   };
 
+<<<<<<< HEAD
   //Håndterer endringer i form
+=======
+>>>>>>> 245ba99c9dde9cbe5be062ae4cb7d7d5c2dcd135
   handleFormChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
     });
   };
+<<<<<<< HEAD
 
   //Henter kordinater og addresse fra google API koden.
   handlePosisjonData = (søkAddresse, søkLng, søkLat) => {
@@ -210,6 +255,9 @@ export default class NyttEvent extends Component {
   }
 
   //skriver ut skjemaet
+=======
+
+>>>>>>> 245ba99c9dde9cbe5be062ae4cb7d7d5c2dcd135
   render() {
     const kategori = [
       "Natur",
@@ -224,7 +272,11 @@ export default class NyttEvent extends Component {
       "Media",
     ];
     return (
+<<<<<<< HEAD
       <form style={{ margin: "20px" }}>
+=======
+      <form onSubmit={this.registrerEvent} style={{ margin: "20px" }}>
+>>>>>>> 245ba99c9dde9cbe5be062ae4cb7d7d5c2dcd135
         <br />
         <h2>Fyll ut Event skjema</h2>
         <TextField
@@ -242,9 +294,14 @@ export default class NyttEvent extends Component {
           InputLabelProps={{
             shrink: true,
           }}
+<<<<<<< HEAD
           label="Fra Dato d/m/å"
           name="fraDato"
           type="date"
+=======
+          label="Fra Dato å/d/m"
+          name="fraDato"
+>>>>>>> 245ba99c9dde9cbe5be062ae4cb7d7d5c2dcd135
           onChange={this.handleFormChange}
           required
         />
@@ -253,9 +310,14 @@ export default class NyttEvent extends Component {
           InputLabelProps={{
             shrink: true,
           }}
+<<<<<<< HEAD
           label="Til dato d/m/å"
           name="tilDato"
           type="date"
+=======
+          label="Til dato å/d/m"
+          name="tilDato"
+>>>>>>> 245ba99c9dde9cbe5be062ae4cb7d7d5c2dcd135
           onChange={this.handleFormChange}
         />
         <br /> <br />
@@ -298,6 +360,7 @@ export default class NyttEvent extends Component {
         </label>
         <br />
         <br />
+<<<<<<< HEAD
         <div style={{ width: "40vw", height: "60vh", margin:0}}>
       <this.MapWithASearchBox
         googleMapURL={
@@ -314,11 +377,44 @@ export default class NyttEvent extends Component {
     
         <Button
          onClick={this.registrerEvent}
+=======
+        <TextField
+          InputLabelProps={{
+            shrink: true,
+          }}
+          label="By"
+          name="sted"
+          onChange={this.handleFormChange}
+          required
+        />
+        <br />
+        <br />
+        <TextField
+          InputLabelProps={{
+            shrink: true,
+          }}
+          label="Adresse"
+          name="adresse"
+          onChange={this.handleFormChange}
+        />
+        <br />
+        <br />
+        <input
+          type="file"
+          onChange={/*Forandrer Innholdet fra null altså ingenting til hvilket bilde du velger*/ (e) => this.setState({ selectedFile: e.target.files[0] })}
+        />
+        <Button
+          type="submit"
+>>>>>>> 245ba99c9dde9cbe5be062ae4cb7d7d5c2dcd135
           value="Submit"
           variant="contained"
           color="primary"
         >
+<<<<<<< HEAD
           Post Event{" "}
+=======
+          Submit{" "}
+>>>>>>> 245ba99c9dde9cbe5be062ae4cb7d7d5c2dcd135
         </Button>
         <p>{this.state.respons}</p>
       </form>
