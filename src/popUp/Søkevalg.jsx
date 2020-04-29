@@ -1,4 +1,6 @@
-
+/*Laget Av Patrick S. Lorentzen
+Dette er hvor all søkefunksjonalitet skjer. Når bruker skriver i søkefeltet eller trykker på kriterielisten. 
+*/
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
@@ -55,7 +57,7 @@ export default function Søkevalg(props) {
     kriterieListe = ['','',''];
          
   } 
-  console.log(navn + " " + kriterieListe);
+  
   props.søkeListe(kriterieListe,'');
   handleClose();
   }

@@ -1,3 +1,7 @@
+/*Laget av Patrick S. Lorentzen - 151685
+og Sondre Reinholdtsen StudNr:225274 
+Sørger for at profil Vinduet er ett vinduet der man kan velge mellom flere sider. */ 
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
@@ -44,26 +48,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+//If setninger som skriver ut relevant info basert på brukerKlikk.
 export default function MenuTabs(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    if(newValue == 0){
+    if(newValue === 0){
       props.skiftTilProfil(); 
     }
-    if(newValue == 1){
+    if(newValue === 1){
     props.skiftTilLagde(); 
     }
-    if(newValue == 2){
+    if(newValue === 2){
       props.skiftTilPåmeldt(); 
     }
-    if (newValue == 3) {
+    if (newValue === 3) {
      props.skiftTilVenner();
     }
   };
-
+  
+//Skriver ut brukerSiden og legger det inn på riktig sidevalg. 
   return (
     <div className={classes.root}>
       <AppBar position="static">

@@ -1,3 +1,6 @@
+/*Laget av Patrick S. Lorentzen og Sondre Reinholdtsen StudNr:225274 
+Denne koden sørger for alt som skjer i ett pop up vindu. Data blir sendt hit og skrevet ut i dialogBoksen */ 
+
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';

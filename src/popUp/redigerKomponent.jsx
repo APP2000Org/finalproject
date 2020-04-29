@@ -1,3 +1,5 @@
+/* Laget av: Patrick S. Lorentzen - 151685
+Her kan man redigere og oppdatere ett event som man har laget*/
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -19,8 +21,7 @@ class RedigerKomponent extends Component {
      
      }
 
-     //[6,"Langesund",5,"S\u00f8ppelplukking p\u00e5 stranda","2020-04-15","Det har samlet seg s\u00e5 mye s\u00f8ppel her. La oss rydde opp sammen!","Dugnad","https:\/\/github.com\/APP2000Org\/ShinobiSondre\/blob\/master\/src\/ArrangementBilder\/s%C3%B8ppelplukking.jpg",2,"2020-04-15","Stranda","16:00:00"],
-
+     //Legger eventInformasjonen inn i textfieldene via state. 
      componentDidMount() { 
       this.setState({kategori: this.state.eventer[6],
                    sted:this.state.eventer[1],
@@ -35,6 +36,7 @@ class RedigerKomponent extends Component {
       
      }
 
+     //Sender skjemaet til database via AXIOS
     registrerEvent = (e) => {
       e.preventDefault();
           var params = new URLSearchParams();
@@ -52,19 +54,20 @@ class RedigerKomponent extends Component {
             if(this.state.respons===""){
             this.setState({respons:"Event har blitt oppdatert!"}); 
             }else this.setState({respons: "Feil informasjon fylt ut!"}); 
-            console.log(res.data); 
         })
           .catch(err => {
               this.setState({respons:"Noe gikk feil! Kontakt administrator!" })
               console.error(err)})
         };
 
+//Når det skjer en forandring i en input så blir det behandlet her.
     handleFormChange = e => {
         this.setState({
         [e.target.name]: e.target.value,
         });
       }
 
+//Skrive rut skjemaet
     render() { 
    
         return (  <form onSubmit={this.registrerEvent} style={{ margin:"20px"}}>
@@ -74,10 +77,10 @@ class RedigerKomponent extends Component {
                       }} label ="Tittel" name="tittel"  value={this.state.tittel}onChange={this.handleFormChange} /> <br/>
             <TextField InputLabelProps={{
                         shrink: true,
-                      }} label ="Fra Dato å/d/m" name="fraDato" value={this.state.fraDato} onChange={this.handleFormChange}/><br/> 
+                      }} label ="Fra Dato å/d/m" name="fraDato" type="date"value={this.state.fraDato} onChange={this.handleFormChange}/><br/> 
              <TextField InputLabelProps={{
                         shrink: true,
-                      }} label ="Til dato å/d/m" name="tilDato" value={this.state.tilDato} onChange={this.handleFormChange}/><br/> 
+                      }} label ="Til dato å/d/m" name="tilDato" type="date" value={this.state.tilDato} onChange={this.handleFormChange}/><br/> 
             <TextField InputLabelProps={{
                         shrink: true,
                       }}label ="Klokkeslett" name = "klokkeslett"  value={this.state.klokkeslett} onChange={this.handleFormChange} /><br/>

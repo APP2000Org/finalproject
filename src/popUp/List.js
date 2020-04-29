@@ -1,3 +1,6 @@
+/*Laget av Fredrik Drøpping Skaug - 225243
+Dette er eventsiden som rendrer eventet og all dens informasjon.
+ */
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
@@ -13,7 +16,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { FixedSizeList } from "react-window";
 import axios from "axios";
 import Modal from "@material-ui/core/Modal";
 import Table from "@material-ui/core/Table";
@@ -29,6 +31,8 @@ import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import AlertDialog from './AlertDialog.jsx';
 import ProfilSide from './ProfilSide.jsx';
+import Grid from '@material-ui/core/Grid';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -74,7 +78,7 @@ const useStyles = makeStyles(theme => ({
 
 class SingleLineGridList extends React.Component {
   state = {
-    påmeldtListe: this.props.påmeldtListe
+    påmeldtListe: this.props.påmeldtListe,
 }
   
   render() {
@@ -123,7 +127,9 @@ class RenderText extends React.Component {
   state = {
     info: [],
     påmeldtListe: [],
-    innloggetBruker : this.props.innloggetBruker
+    innloggetBruker : this.props.innloggetBruker,
+    eierInfo: [],
+
   };
 
   skrivUt = (funksjonsnavn, tabell, kollonen, verdien, where) => {
@@ -140,8 +146,11 @@ class RenderText extends React.Component {
       timeout: 5000
     })
       .then(res => {
+        if(where === 0)
         this.setState({ info: res.data });
-        console.log(res);
+        if(where === 1)
+        this.setState({eierInfo:res.data});
+        
       })
       .catch(err => console.error(err));
   };
@@ -162,10 +171,10 @@ class RenderText extends React.Component {
     .then(res =>{
         if(where===0){
         this.setState({påmeldtListe: res.data}); 
-        console.log(res.data);
         }
-        if(where===1)
-        console.log(res.data);
+        if(where===1){
+
+        }
   })
     .catch(err => console.error(err))
   };
@@ -175,7 +184,8 @@ class RenderText extends React.Component {
   var puttSammen = "'" + this.props.Enr+ "'";
     var verdien =  this.state.innloggetBruker[2]+ "," + this.props.Enr; 
     this.hentPåmeldtListe('settInnRad','påmeldte','Brukere_Bnr,Arrangement_ENr',verdien,1);
-    this.hentPåmeldtListe('søkEtter','påmeldte','Arrangement_ENr',puttSammen,0);
+    this.hentPåmeldtListe('påmeldteSinBruker',puttSammen,'','',0);
+    this.setState({hallo:"du er påmeldt"});
     }
 }
 
@@ -183,38 +193,71 @@ meldAv = () =>{
   var puttSammen = "'" + this.props.Enr+ "'";
   var verdien =  this.state.innloggetBruker[2] + " AND Arrangement_ENr = " + this.props.Enr; 
   this.hentPåmeldtListe('slettFra','påmeldte','Brukere_Bnr',verdien,1);
-  this.hentPåmeldtListe('søkEtter','påmeldte','Arrangement_ENr',puttSammen,0);
+  this.hentPåmeldtListe('påmeldteSinBruker',puttSammen,'','',0);
+  this.setState({hallo:"du er meldt av"});
 }
 
 ConditionalButton = () =>{
- var output = <Button  variant="contained" color="primary" onClick={this.meldPå}>Bli med</Button>
+  var output = <Button  variant="contained" color="primary" onClick={this.meldPå}>Bli med</Button>
 
- {this.state.påmeldtListe.map((item) => {
-     if(item.Bnr == this.state.innloggetBruker[2])
-     output = <Button variant="outlined" onClick={this.meldAv}>Meld deg av</Button>
-})}
-    return output
-}
+  this.state.påmeldtListe.map((item) => {
+      if(item.Bnr == this.state.innloggetBruker[2])
+      output = <Button variant="outlined" onClick={this.meldAv}>Meld deg av</Button>
+ })
+ if(this.state.innloggetBruker[0] === false){
+   output = "";
+ }
+     return output
+ }
 
   componentDidMount = e => {
     var EventNummer = this.props.Enr;
-    this.skrivUt("søkEtter", "arrangement", "ENr", EventNummer, "");
+    this.skrivUt("søkEtter", "arrangement", "ENr", EventNummer, 0);
     this.hentPåmeldtListe('påmeldteSinBruker',EventNummer,'','',0);
+    this.skrivUt("arrangementSinBruker",EventNummer,'','',1)
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.påmeldtListe !== this.state.påmeldtListe) {
+ 
+    }
+  }
 
   render() {
     return this.state.info.map(info => {
       return (
         <div key={info.ENr}>
           <img
-            style={{ borderRadius: 20 }}
+            style={{ borderRadius: 20}}
             src="https://image.forskning.no/1343525.jpg?imageId=1343525&width=480&height=274"
             alt="Eventbilde"
+           
           />
           <Typography variant="h5" component="h4" gutterBottom>
             {info.Tittel}
           </Typography>
+          <Grid container spacing={1} direction="row" alignItems="baseline" justify="space-between" >
+          <Grid item>
+          {this.state.eierInfo.map((tile) => (
+          
+          <AlertDialog
+          key={tile.Bnr}
+          enVariant="text"
+         beskrivelse={<div><Typography variant="h6"><AccountCircleIcon/>  {tile.Fornavn}</Typography></div>}
+         innhold={<ProfilSide
+                 loggUt = {this.props.loggUt}
+                 close = {this.props.onClose}
+                  eierInfo={tile.Bnr} 
+                  innloggetBrukerInfo={this.state.innloggetBruker}/>
+                } />
+          ))} 
+      
+          </Grid>
+            <Grid item >
+              {this.state.hallo}
           <this.ConditionalButton/>
+          </Grid>
+          </Grid>
           <Typography variant="subtitle1" gutterBottom>
             {info.Beskrivelse}
           </Typography>
@@ -331,7 +374,6 @@ class PostKommentar extends React.Component {
       timeout: 5000
     }).then(res => {
       this.setState({ kommentar: res.data });
-      console.log(res);
     });
   };
 
@@ -383,7 +425,16 @@ class PostKommentar extends React.Component {
                 <Avatar alt="Avatar" src={kommentar.Avatar} />
               </ListItemAvatar>
               <ListItemText
-                primary={kommentar.Fornavn}
+                primary=  {<AlertDialog
+                            enVariant="text"
+                            beskrivelse={<div>{kommentar.Fornavn}</div>}
+                            innhold={<ProfilSide
+                            lukkKart = {this.props.lukkKart}
+                            loggUt = {this.props.loggUt}
+                            close = {this.props.onClose}
+                            eierInfo={kommentar.Brukere_Bnr} 
+                            innloggetBrukerInfo={this.props.innloggetBrukerInfo}/>}
+                         />}
                 secondary={kommentar.Tekst}
               />
             </ListItem>
@@ -424,6 +475,9 @@ function SimpleExpansionPanel(props) {
             <PostKommentar 
             Enr = {props.Enr}
             Bnr = {props.innloggetBruker[2]}
+            innloggetBrukerInfo = {props.innloggetBruker}
+            loggUt = {props.loggUt}
+            onClose={props.onClose}
             />
 
           </List>
@@ -456,13 +510,15 @@ export default function SimpleModal(props) {
   const classes = useStylesModal();
   const [open, setOpen] = React.useState(true);
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
+
 
   const handleClose = () => {
     setOpen(false);
+    if(props.onClose != null){
     props.onClose(); 
+    }else{
+      props.lukkKart(); 
+    }
   };
 
   const body = (
@@ -475,8 +531,6 @@ export default function SimpleModal(props) {
       />
     </div>
   );
-  console.log(props.Enr);
-  console.log(props.innloggetBruker[2]);
 
   return (
     <div>

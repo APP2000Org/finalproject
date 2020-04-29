@@ -1,12 +1,14 @@
+/*Laget Av: Patrick S. Lorentzen - 151685
+og Mikael Wenneck Rønnevik - 
+
+Dette er hovedSiden. Også kjent som MainController. Alt som skjer på siden har sin rot her. 
+*/
 import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
 import EventListe from './eventListe.jsx';
 import axios from 'axios';
 import ButtonAppBar from './NavigasjonBar.jsx'
 import Grid from '@material-ui/core/Grid';
 import Maps from './GoogleMaps/Maps.jsx';
-import MenuTabs from './popUp/MenuTabs.jsx';
-import ProfilSide from './popUp/ProfilSide.jsx';
 
 class App extends Component{
 
@@ -21,18 +23,11 @@ påmeldtListe: [],
 }
 
 settKriterieListe (liste) {
-    this.setState({kriterieListe:liste}); // !!!!!!!!!!!!!!!!! FJERN FUNKER IKKE MED EN GANG PGA setState ER FORSINKET!!!!!!!!!!!!!!!!
+    this.setState({kriterieListe:liste}); 
 
 let alleKriterier = this.omgjørTilSql(); 
-
-//console.log("Søkekriteriene: " + this.state.søkeTeksten + " og " + alleKriterier);
 this.søkeFeltSøk('søkFeltSkriv','','',this.state.søkeTeksten,alleKriterier);
   }
-
-testKlikk = () =>{
-  //this.hentPåmeldtListe('søkEtter','påmeldte','Brukere_Bnr',this.state.innloggetBrukerInfo[2],''); 
-  console.log(this.state.eventer);
-}
 
 componentDidUpdate(prevProps, prevState) {
   if (prevState.kriterieListe !== this.state.kriterieListe) {
@@ -40,9 +35,6 @@ componentDidUpdate(prevProps, prevState) {
     this.søkeFeltSøk('søkFeltSkriv','','',this.state.søkeTeksten,alleKriterier);
   }
 
-  if (prevState.innloggetBrukerInfo !== this.state.innloggetBrukerInfo) {
-  //NOE KAN SKJER HER ETTER AT BRUKER HAR LOGGET INN
-  }
 }
 
 hentPåmeldtListe = (funksjonsnavn, tabell, kollonen, verdien, where) => {
@@ -60,24 +52,26 @@ hentPåmeldtListe = (funksjonsnavn, tabell, kollonen, verdien, where) => {
 })
   .then(res =>{
 this.setState({påmeldtListe: res.data}); 
-console.log(res.data);
+
 })
   .catch(err => console.error(err))
 };
 
+//Omgjør søkekriterier til sql kode
 omgjørTilSql = () =>{
   let alleKriterier = ''; 
 
-if(this.state.kriterieListe[0] != '')
+if(this.state.kriterieListe[0] !== '')
   alleKriterier += " AND FraDato='" + this.state.kriterieListe[0] + "'";  
-  if(this.state.kriterieListe[1] != '')
-  alleKriterier += " AND ByNavn = '" + this.state.kriterieListe[1] + "'";  
-  if(this.state.kriterieListe[2] != '')
+  if(this.state.kriterieListe[1] !== '')
+  alleKriterier += " AND ByNavn LIKE '% " + this.state.kriterieListe[1] + "%'";  
+  if(this.state.kriterieListe[2] !== '')
   alleKriterier += " AND Kategori = '" + this.state.kriterieListe[2] + "'"; 
 
   return alleKriterier; 
 }
 
+//når bruker har valgt søkekriterier blir de sendt til php
 søkeFeltSøk = (funksjonsnavn, tabell, kollonen, verdien, where) => {
   axios({
     method: 'get',
@@ -112,12 +106,11 @@ skrivUtAlt = (funksjonsnavn, tabell, kollonen, verdien,where) => {
 })
   .then(res =>{
 this.setState({eventer: res.data}); 
-console.log(res.data);
 })
   .catch(err => console.error(err))
 };
 
-/*
+/* Henter SESSION variablene og sjekker om brukeren er pålogget.
 sjekkOmInnlogget = ()=> {
   axios({
     method: 'get',
@@ -155,6 +148,7 @@ componentDidMount = e => {
   //EVENTUELT LEGGE TIL forceUpdate()? Etter at innlogging er godkjent?
 }
 
+//Skriv ut alle eventene som er i databasen. Og display dem som boxer under google maps.
 renderArray2 = () =>{
   if(this.state.eventer.length > 0){
     return (
@@ -183,7 +177,7 @@ renderArray2 = () =>{
   }else return (<p>Ingen treff!</p>); 
 };
 
-
+//Render ut hele siden og alle dens komponenter.
   render(){
   
     return(
@@ -203,9 +197,9 @@ kriterieListe = {this.state.kriterieListe}
 //Denne tabellen sendes fra App til maps. Og kan brukes ved å skrive props. Oppdaterer seg automatisk i forhold til hva som skjer i app.
 tabell = {this.state.eventer}
 innloggetBruker = {this.state.innloggetBrukerInfo}
+loggUt = {this.loggUt}
 />
 
-  <Button onClick={this.testKlikk.bind(this)}>TestKnapp</Button>
      <h1 style={{textAlign:"center"}}>Kommende Eventer {this.state.innlogget}</h1>
 {this.renderArray2()}
 

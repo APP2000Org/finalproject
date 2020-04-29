@@ -1,3 +1,6 @@
+/*Laget av Patrick S. Lorentzen
+Denne kode sørger for at alle events */
+
 import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -10,36 +13,6 @@ import Typography from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
 import GroupIcon from '@material-ui/icons/Group';
 import EventSide from './popUp/EventSide.jsx';
-
-
-/*
-const StyledBadge = withStyles(theme => ({
-  badge: {
-    right: -3,
-    top: 13,
-    border: `2px solid ${theme.palette.background.paper}`,
-    padding: "0 4px"
-  }
-}))(Badge);
-
-const useStyles = makeStyles({
-  card: {
-    maxWidth: 345
-  },
-  media: {
-    height: 140
-  }
-});
-*/
-function påmeldtKnapp(){
-
-  //if()
-}
-
-function handleChange(){
-  alert("Dette er en test"); 
-  console.log("Dette er inni bli med click");
-}
 
 export default function EventListe(props) {
 
@@ -68,6 +41,7 @@ export default function EventListe(props) {
           image = "/iconer/fest.png"//{props.frontBilde}
           title="Contemplative Reptile"
         />
+        <img src={"data:image/png;base64," + props.frontBilde}/>
         <CardContent>
         <Typography gutterBottom variant="overline" component="h2">
           {props.dato}

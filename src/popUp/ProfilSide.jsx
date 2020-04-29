@@ -1,3 +1,8 @@
+/*Laget Av Sondre Reinholdtsen StudNr:225274 og
+Patrick S. Lorentzen - 151685
+På denne siden skriver vi ut all informasjon om en bruker. Venner, lagde events, påmeldte.
+Om man er en eier av siden, altså innlogget, så vil man kunne redigere og endre på ting og logge ut */
+
 import React, { Component } from "react";
 import axios from "axios";
 import Button from '@material-ui/core/Button';
@@ -24,14 +29,19 @@ export default class ProfilSide extends Component {
     påmeldte: [],
     venner: [],
     innloggetBrukerInfo:this.props.innloggetBrukerInfo,
-    eierInfo:this.props.eierInfo
+    eierInfo:this.props.eierInfo,
+    hallo: ""
   };
 
   loggUt = () =>{
  this.props.loggUt();
+
+ if(this.props.onClose != null){
  this.props.close();
+ }
   }
 
+  //Aktiverer AXIOS som sender til php
   lagdeEvents = () =>{ //EVENT TABELLEN
     this.skrivUtPåmeldteEvents(
       "søkEtter",
@@ -62,10 +72,10 @@ this.skrivUtVenner("vennOgBruker",this.state.eierInfo,
   }
 
   skrivUtProfil = () => {
-
     this.skrivUtProfilInfo("søkEtter", "brukere", "Bnr", this.state.eierInfo, "");
   }
 
+  //AXIOS KODENE SOM SENDER TIL PHP
   skrivUtProfilInfo = (funksjonsnavn, tabell, kollonen, verdien, where) => {
     axios({
       method: "get",
@@ -99,9 +109,9 @@ this.skrivUtVenner("vennOgBruker",this.state.eierInfo,
       timeout: 5000,
     })
       .then((res) => {
-        if(funksjonsnavn == "påmeldteSinArrangement")
+        if(funksjonsnavn === "påmeldteSinArrangement")
         this.setState({ påmeldte: res.data });
-        if(tabell == "arrangement")
+        if(tabell === "arrangement")
         this.setState({ eventer: res.data });
       
       })
@@ -129,7 +139,7 @@ this.skrivUtVenner("vennOgBruker",this.state.eierInfo,
       .catch((err) => console.error(err));
   };
 
-
+//AXIOS koden som kaller på slett rad fra php
   slettEvent = (funksjonsnavn, tabell, kollonen, verdien, where) => {
     axios({
       method: "get",
@@ -168,27 +178,32 @@ this.skrivUtVenner("vennOgBruker",this.state.eierInfo,
     );
   };
 
+  //Trigges av at en bruker har trykket på bli venn knappen.
   fåVenn = () =>{
     if(this.state.innloggetBrukerInfo[0] ===true){
     var verdien =  this.state.innloggetBrukerInfo[2]+ ", " + this.state.eierInfo; 
     this.skrivUtVenner('settInnRad','venn','Brukere_Bnr,Brukere_Bnr1',verdien,1);
     this.skrivUtVenner("vennOgBruker",this.state.eierInfo,"","",0);
+    this.påLoggetRender(); 
+    this.setState({hallo:"dere er nå venner"});
     }
   }
 
+  //trigges dersom en bruker allerede er venn og han har trykket på fjern venn knappen
 fjernVenn = () =>{
   var verdien =  this.state.innloggetBrukerInfo[2] + " OR Brukere_Bnr1 = " + this.state.innloggetBrukerInfo[2] +")"+ 
     " AND (Brukere_Bnr = " + this.state.eierInfo + " OR Brukere_Bnr1 = "+ this.state.eierInfo +")"; 
   this.skrivUtVenner('slettFra','venn','(Brukere_Bnr',verdien,1);
   this.skrivUtVenner("vennOgBruker",this.state.eierInfo,"","",0);
+  this.setState({hallo:"dere er ikke lenger venner"});
+
 }
 
+//Passer på at den riktige knappen blir rendret ut. Dersom de er venner så blir den "Fjern venn", dersom ikke "Legg til"
   påLoggetRender = () => {
-  
   var output = <Button onClick={this.loggUt} style={{position:"relative",left:"10%"}}>Logg ut</Button>
    var found =false; 
-
-      {this.state.venner.map((item) => {
+      this.state.venner.map((item) => {
         if(item.VennBnr == this.state.innloggetBrukerInfo[2]){
           found = true; 
             return output = <Button variant="outlined" onClick={this.fjernVenn}>Fjern som venn</Button>
@@ -197,31 +212,35 @@ fjernVenn = () =>{
               {
               output = <Button variant="contained" onClick={this.fåVenn}>Legg til som venn</Button>
               }     
-      })}
-    
+      })
+
+      if((this.state.venner.length === 0) && (this.state.innloggetBrukerInfo[2] !== this.state.eierInfo)){
+        output = <Button variant="contained" onClick={this.fåVenn}>Legg til som venn</Button>
+      }
     
     return output
-
   }
 
+  //Skriver ut profilsiden. Biografien. Går gjennom en liste som er hentet fra bruker tabellen i databasen
   renderProfilInfo = () => {
    //this.skrivUtProfil(); 
     if (this.state.navneListe.length > 0) {
       return (
-      <Grid container>
+      <Grid container justify="center">
      { this.state.navneListe.map((item) => {
         return (
           <Grid
             key={
-              item.Bnr /*Bytter ut item.Bnr med en funksjon som henter BNummeret*/
+              item.Bnr 
             }
           >
             <Grid item>
-            <Grid container justify="space-between" alignItems="flex-start" >
+            <Grid container justify="space-between" alignItems="baseline" >
                 <Grid item>
                   <Typography variant="h6"><AccountCircleIcon/> {item.Fornavn} </Typography>
                 </Grid>
                 <Grid item>
+                  {this.state.hallo}
                  <this.påLoggetRender/>
                  </Grid>
             </Grid>
@@ -244,7 +263,7 @@ fjernVenn = () =>{
     )} else return <CircularProgress/>;
   };
 
-
+//skriver ut tabellen over påmeldte som er hentet fra databasen
   renderPåmeldte = () => {
     if (this.state.påmeldte.length > 0) {
       return (
@@ -268,7 +287,8 @@ fjernVenn = () =>{
        beskrivelse={eventInfo[3]}
        innhold={<EventSide
                 info={eventInfo} 
-                innloggetBruker={this.state.innloggetBrukerInfo}/>}
+                innloggetBruker={this.state.innloggetBrukerInfo}
+                onClose={this.props.close}/>}
        />
            
            
@@ -281,11 +301,12 @@ fjernVenn = () =>{
     )} else return "Er ikke meldt på noen events enda!";
   };
 
+  //Skriver ut alle events som den brukeren har laget selv.Hentet fra databsen og puttet i denne arrayen som den går gjennom.
   renderEgeneEvents = () => {
     //this.lagdeEvents();
     if (this.state.eventer.length > 0) {
       var nyttEventKnapp = ""; 
-      if(this.state.innloggetBrukerInfo[2] == this.state.eierInfo){
+      if(this.state.innloggetBrukerInfo[2] === this.state.eierInfo){
         nyttEventKnapp = <AlertDialog
                             enVariant="text"
                             beskrivelse={<div>Nytt event <AddCircleIcon/></div>}
@@ -314,7 +335,7 @@ fjernVenn = () =>{
           var redigerKnapp = "";
            
 
-           if(this.state.innloggetBrukerInfo[2] == this.state.eierInfo){
+           if(this.state.innloggetBrukerInfo[2] === this.state.eierInfo){
              slettKnapp =  <Button color="secondary" onClick={() => {this.slettEvent("slettFra","arrangement","ENr",eventInfo[0],"")}}>
                <DeleteForeverIcon/></Button>; 
              redigerKnapp = <AlertDialog
@@ -328,7 +349,7 @@ fjernVenn = () =>{
         return (
           <Grid item
             key={
-              eventInfo[0] /*Bytter ut item.Bnr med en funksjon som henter BNummeret*/
+              eventInfo[0] 
             }
           >
             
@@ -340,7 +361,8 @@ fjernVenn = () =>{
                      beskrivelse={eventInfo[3]}
                      innhold={<EventSide
                               info={eventInfo} 
-                              innloggetBruker={this.state.innloggetBrukerInfo}/>}
+                              innloggetBruker={this.state.innloggetBrukerInfo}
+                              onClose={this.props.close}/>}
                />
                 </Grid>
                 <Grid item>
@@ -360,6 +382,7 @@ fjernVenn = () =>{
     )} else return "Har ikke laget noen events enda!";
   };
 
+  //Skriver ut alle venner som er hentet fra databasen. Gjør at man kan åpne og profilen dems.
   renderVenner = () => {
     if (this.state.venner.length > 0) {
       return (
@@ -398,7 +421,9 @@ fjernVenn = () =>{
     } else return "Har ikke lagt til noen venner enda!";
   };
 
-  render() {                         
+  //Skriver ut info basert på hva bruker trykker på.
+  render() {  
+    if(this.props.innloggetBrukerInfo[0] === true){                     
     return (
      <div>
        <MenuTabs
@@ -431,5 +456,6 @@ fjernVenn = () =>{
      
      </div>
     );
+    }else return (<p>Du må være innlogget for å se profil-Informasjon</p>)
   }
 }

@@ -1,3 +1,6 @@
+/*Laget av Patrick S. Lorentzen - 151685
+Denne siden kan man logge inn eller lage en ny bruker */
+
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -29,13 +32,15 @@ console.log("Dette er sjekk innlogging: " + res.data);
 };
   */
 
+  //callback til loggInn i app. Gjør at alle komponenter er bevisst på at en bruker er logget inn. 
   sendTilApp = (tabell) =>{
    this.props.loggInnFunksjon(tabell); 
   }
 
+  //Sender inn logg inn teksten til php og sjekker om at det er en bruker som finnes som har disse kriteriene. 
+  //Skriver ut infoen i innloggetBrukerInfo tabell dersom true
 loggInn = (e) => {
   e.preventDefault(); 
-  
       axios({
         method: 'get',
         url:"https://boeventsphp.000webhostapp.com/loggInn.php",
@@ -46,16 +51,15 @@ loggInn = (e) => {
       }) 
     .then(res =>{
       this.setState({brukerInfo:res.data});
-      if(this.state.brukerInfo[0]==true){
+      if(this.state.brukerInfo[0]===true){
       this.setState({respons:"Du har blitt logget inn"}); 
-      console.log(res); 
+   
       this.sendTilApp(this.state.brukerInfo);
      // this.sjekkOmInnlogget();
       //window.location.reload(false);
 
       }else {
         this.setState({respons: "Brukernavn eller passord er feil!"})
-      console.log(this.state.brukerInfo);
     }; 
      
   })
@@ -65,13 +69,14 @@ loggInn = (e) => {
         
   };
 
-
+//Behandler forandring i skjema
   handleFormChange = e => {
     this.setState({
     [e.target.name]: e.target.value,
     });
   }
 
+  //Skriver ut innloggingskjemaet.
   render(){
 return(
     <form onSubmit={this.loggInn} style={{padding:50}}>

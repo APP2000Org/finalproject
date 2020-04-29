@@ -1,3 +1,7 @@
+/* Av Magnus Anfinnsen - 225259 
+Dette er Google maps API'n som rendres ut i App.
+*/
+
 import React, { useState } from "react";
 import EventSide from '../popUp/EventSide.jsx';
 import {
@@ -7,14 +11,6 @@ import {
   Marker,
   InfoWindow
 } from "react-google-maps";
-import * as eventData from "./events-places.json";
-import axios from "axios";
-import { getThemeProps } from "@material-ui/styles";
-
-var evenNummer = "hei";
-var lat = 0;
-var lng = 0;
-var markers = []; 
 
 
 
@@ -23,7 +19,11 @@ export default function Maps(props) {
 
   function Map() {
     const [selectedEvent, setSelectedEvent] = useState(null);
+    const [hoveredEvent, setHoveredEvent] = useState(null);
   
+ const setNull = () =>{
+    setSelectedEvent(null)
+  }
     return (
       <GoogleMap
         defaultZoom={12}
@@ -42,15 +42,43 @@ export default function Maps(props) {
             }}
             onClick={() => {
               setSelectedEvent(event);
-              evenNummer = event.ENr;
-              console.log(evenNummer);
             }}
+
+            onMouseOver={() => {
+              if (setHoveredEvent != null)
+              setHoveredEvent(event)}}
+  
+            onMouseOut={() =>  {
+
+              setHoveredEvent(null)}}
+  
+
             icon={{
               url: "/iconer/" + event.Kategori + ".png",
-              scaledSize: new window.google.maps.Size(25, 25)
+              scaledSize: new window.google.maps.Size(25,25)
             }}
           />
         ))}
+
+
+        {hoveredEvent && (
+          
+          
+          <InfoWindow
+            
+            position={{
+              lat: parseFloat(hoveredEvent.lat)+ 0.007,
+              lng: parseFloat(hoveredEvent.lng)
+            }}
+
+  
+
+          >
+            <div>
+              <h2> {hoveredEvent.Tittel} </h2>
+            </div>
+          </InfoWindow>
+        )}
   
         {selectedEvent && (
           <InfoWindow
@@ -69,11 +97,17 @@ export default function Maps(props) {
                       selectedEvent.antallPåmeldte,selectedEvent.TilDato,selectedEvent.Adresse, selectedEvent.Klokkeslett,
                       ]}
               innloggetBruker = {props.innloggetBruker}
+             lukkKart = {setNull}
+             loggUt = {props.loggUt}
                       />
              
             </div>
           </InfoWindow>
+
+          
         )}
+        
+
       </GoogleMap>
     );
   }

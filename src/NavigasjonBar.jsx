@@ -1,3 +1,5 @@
+
+
 import React from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -78,7 +80,7 @@ export default function ButtonAppBar(props) {
      //  props.søkeListe(enTekst)
     // }
 
-     const [anchorEl, setAnchorEl] = React.useState(null);
+    
 
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
