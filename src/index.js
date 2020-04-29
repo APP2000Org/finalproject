@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App.jsx';
 import * as serviceWorker from './serviceWorker';
+import LeggInnBilde from './popUp/leggInnBilde.jsx';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

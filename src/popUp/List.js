@@ -76,6 +76,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+
+
 class SingleLineGridList extends React.Component {
   state = {
     påmeldtListe: this.props.påmeldtListe,
@@ -100,7 +102,7 @@ class SingleLineGridList extends React.Component {
           {this.state.påmeldtListe.map(tile => (
           
             <GridListTile key={tile.Bnr}>
-              <img src={tile.Avatar} alt={tile.Fornavn} />
+              <img src="https://image.shutterstock.com/image-illustration/male-default-placeholder-avatar-profile-260nw-582509551.jpg" alt={tile.Fornavn} />
               <GridListTileBar title={<AlertDialog
                       enVariant="text"
                      beskrivelse={<div>{tile.Fornavn}</div>}
@@ -129,13 +131,13 @@ class RenderText extends React.Component {
     påmeldtListe: [],
     innloggetBruker : this.props.innloggetBruker,
     eierInfo: [],
-
+    hallo: ""
   };
 
   skrivUt = (funksjonsnavn, tabell, kollonen, verdien, where) => {
     axios({
       method: "get",
-      url: "https://boeventsphp.000webhostapp.com/",
+      url: "https://boeventsphp.000webhostapp.com/index.php",
       params: {
         funksjonsnavn,
         tabell,
@@ -214,7 +216,7 @@ ConditionalButton = () =>{
     var EventNummer = this.props.Enr;
     this.skrivUt("søkEtter", "arrangement", "ENr", EventNummer, 0);
     this.hentPåmeldtListe('påmeldteSinBruker',EventNummer,'','',0);
-    this.skrivUt("arrangementSinBruker",EventNummer,'','',1)
+    this.skrivUt("arrangementSinBruker",EventNummer,'','',1);
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -227,12 +229,7 @@ ConditionalButton = () =>{
     return this.state.info.map(info => {
       return (
         <div key={info.ENr}>
-          <img
-            style={{ borderRadius: 20}}
-            src="https://image.forskning.no/1343525.jpg?imageId=1343525&width=480&height=274"
-            alt="Eventbilde"
-           
-          />
+          <img src={this.props.bilde} />;
           <Typography variant="h5" component="h4" gutterBottom>
             {info.Tittel}
           </Typography>
@@ -254,8 +251,8 @@ ConditionalButton = () =>{
       
           </Grid>
             <Grid item >
-              {this.state.hallo}
           <this.ConditionalButton/>
+          {this.state.hallo}
           </Grid>
           </Grid>
           <Typography variant="subtitle1" gutterBottom>
@@ -460,7 +457,8 @@ function SimpleExpansionPanel(props) {
         Enr = {props.Enr}
         innloggetBruker = {props.innloggetBruker}
         loggUt = {props.loggUt}
-        onClose={props.onClose}/>
+        onClose={props.onClose}
+        bilde = {props.bilde}/>
       </div>
       <ExpansionPanel>
         <ExpansionPanelSummary
@@ -528,6 +526,7 @@ export default function SimpleModal(props) {
       innloggetBruker = {props.innloggetBruker}
       loggUt = {props.loggUt}
       onClose={props.onClose}
+      bilde = {props.bilde}
       />
     </div>
   );

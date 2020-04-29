@@ -1,5 +1,7 @@
 
 
+/*Laget av Patrick S. Lorentzen 
+Her ligger Navigasjonsbaren*/ 
 import React from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -14,8 +16,7 @@ import Dialog from '@material-ui/core/Dialog';
 import Søkevalg from './popUp/Søkevalg.jsx';
 import ProfilSide from './popUp/ProfilSide.jsx';
 
-
-
+//Utseende og styling til navBaren
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -70,18 +71,13 @@ const useStyles = makeStyles(theme => ({
 
 export default function ButtonAppBar(props) {
 
+  //Når noen skriver i søkefeltet så blir det behandlet.
   function HandleSkrivSøkefelt(e){
     var søkeTekst = e.target.value;
     props.søkeFunksjon(søkeTekst);
      }
-     
-    // function søkeKriterier2(enTekst){
-       //props.søkeListe(enTekst)
-     //  props.søkeListe(enTekst)
-    // }
 
-    
-
+     //Skrur av og på vinduet som åpner seg når man trykker på login-eller profilavataren.
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
 
@@ -166,12 +162,3 @@ innloggetBrukerInfo = {[props.innlogget,props.BrukerNavn,props.Bnr]}
     </div>
   );
 }
-/*
-<ProfilSide 
-   loggUt = {props.loggUt}
-   close = {handleClose}
-   innlogget = {props.innlogget}
-BrukerNavn= {props.BrukerNavn}
-Bnr = {props.Bnr}
-/>
-*/

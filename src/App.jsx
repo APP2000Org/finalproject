@@ -1,5 +1,5 @@
 /*Laget Av: Patrick S. Lorentzen - 151685
-og Mikael Wenneck Rønnevik - 
+og Mikael Wenneck Rønnevik - 226804
 
 Dette er hovedSiden. Også kjent som MainController. Alt som skjer på siden har sin rot her. 
 */
@@ -13,13 +13,14 @@ import Maps from './GoogleMaps/Maps.jsx';
 class App extends Component{
 
 state = {
-  innloggetBrukerInfo: [true,"Chris",5], //Infoen som lagres om en innlogget bruker. Er false dersom ikke innlogget. 
+  innloggetBrukerInfo: [false,"",0], //Infoen som lagres om en innlogget bruker. Er false dersom ikke innlogget. 
 text: "",
 respons: "",
 eventer: [],
 kriterieListe: ['','',''], //Søkekriterie liste. index 0=Dato, index 1=by, index 2 = kategori
 søkeTeksten: "",
 påmeldtListe: [],
+bilde: null
 }
 
 settKriterieListe (liste) {
@@ -34,6 +35,7 @@ componentDidUpdate(prevProps, prevState) {
     let alleKriterier = this.omgjørTilSql(); 
     this.søkeFeltSøk('søkFeltSkriv','','',this.state.søkeTeksten,alleKriterier);
   }
+ 
 
 }
 
@@ -110,11 +112,11 @@ this.setState({eventer: res.data});
   .catch(err => console.error(err))
 };
 
-/* Henter SESSION variablene og sjekker om brukeren er pålogget.
+//Sjekker innom session variablene for å se om en bruker er pålogget eller ikke
 sjekkOmInnlogget = ()=> {
   axios({
     method: 'get',
-    url: 'http://localhost/sessionSjekk.php', 
+    url: 'https://boeventsphp.000webhostapp.com/sessionSjekk.php', 
  timeout: 5000
 })
   .then(res =>{
@@ -124,7 +126,7 @@ console.log(res);
 })
   .catch(err => console.error(err))
 };
-*/
+
 handleSøk = (søkeTekst) => {
   this.setState({søkeTeksten:søkeTekst});
 
@@ -142,10 +144,9 @@ loggUt = () =>{
 }
 
 componentDidMount = e => {
-  //this.sjekkOmInnlogget(); 
+  this.sjekkOmInnlogget(); 
   this.skrivUtAlt('skrivUtAlt','arrangement','','',''); 
   //LEGG INN EN AXIOS SJEKK PÅ OM EN BRUKER ER LOGGET INN OG FÅR INNLOGGINGSVARIABLENE
-  //EVENTUELT LEGGE TIL forceUpdate()? Etter at innlogging er godkjent?
 }
 
 //Skriv ut alle eventene som er i databasen. Og display dem som boxer under google maps.

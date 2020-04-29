@@ -10,8 +10,6 @@ class EventSide extends Component {
         info: this.props.info,
         påmeldtListe: [],
         innloggetBruker: this.props.innloggetBruker,
-        trykketmeldPå: false,
-        trykketmeldAv: false
     }
 
  
@@ -23,6 +21,7 @@ class EventSide extends Component {
            onClose={this.props.onClose}
            loggUt={this.props.loggUt}
            lukkKart = {this.props.lukkKart}
+           bilde = {this.props.bilde}
            /> 
         </div> );
     }

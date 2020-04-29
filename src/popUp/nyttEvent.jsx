@@ -25,7 +25,6 @@ export default class NyttEvent extends Component {
     tilDato: "",
     beskrivelse: "",
     kategori: "",
-    selectedFile: null,
     klokkeslett: "",
     respons: "",
 
@@ -183,7 +182,7 @@ export default class NyttEvent extends Component {
     params.append("lat", this.state.lat);
     params.append("lng", this.state.lng);
     axios
-      .post("http://localhost/nyEvent.php", params)
+      .post("https://boeventsphp.000webhostapp.com/nyEvent.php", params)
       .then((res) => {
         //console.log(this.state.selectedFile);
         if (res.data === "") {
@@ -312,13 +311,7 @@ export default class NyttEvent extends Component {
        nåSted = {this.state.sted}
       />
        </div>
-       Legg til bilde som representerer ditt event <br/>
-        <input
-          type="file"
-          onChange={/*Forandrer Innholdet fra null altså ingenting til hvilket bilde du velger*/ (e) => this.setState({ selectedFile: e.target.files[0] })}
-        />
-        <br />
-        <br />
+    
         <Button
          onClick={this.registrerEvent}
           value="Submit"

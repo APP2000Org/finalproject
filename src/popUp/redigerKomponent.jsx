@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import axios from 'axios';
+import LeggInnBilde from './leggInnBilde.jsx';
 
 class RedigerKomponent extends Component {
     state = { 
@@ -18,7 +19,6 @@ class RedigerKomponent extends Component {
         kategori: this.props.kategori,
         adresse: "",
         klokkeslett:"",
-     
      }
 
      //Legger eventInformasjonen inn i textfieldene via state. 
@@ -32,9 +32,15 @@ class RedigerKomponent extends Component {
                    adresse:this.state.eventer[10],
                    klokkeslett: this.state.eventer[11]
                   });
-                 
-      
      }
+  
+  
+  
+    handleFormChange = (e) => {
+      this.setState({
+        [e.target.name]: e.target.value,
+      });
+    };
 
      //Sender skjemaet til database via AXIOS
     registrerEvent = (e) => {
@@ -49,7 +55,7 @@ class RedigerKomponent extends Component {
           params.append('TilDato', this.state.tilDato);
           params.append('Adresse', this.state.adresse);
           params.append('Klokkeslett', this.state.klokkeslett);
-          axios.post('http://localhost/oppdaterEvent.php', params) 
+          axios.post('https://boeventsphp.000webhostapp.com/oppdaterEvent.php', params) 
           .then(res =>{
             if(this.state.respons===""){
             this.setState({respons:"Event har blitt oppdatert!"}); 
@@ -70,7 +76,7 @@ class RedigerKomponent extends Component {
 //Skrive rut skjemaet
     render() { 
    
-        return (  <form onSubmit={this.registrerEvent} style={{ margin:"20px"}}>
+        return (  <form onSubmit={ this.registrerEvent} style={{ margin:"20px"}}>
             <br/>
             <TextField InputLabelProps={{
                         shrink: true,
@@ -88,10 +94,7 @@ class RedigerKomponent extends Component {
             <label value="Kategori">Kategori<br/><select label="Kategori" name="kategori" defaultValue={this.state.kategori} onChange={this.handleFormChange}>
             <option key="Underholdning"value="Underholdning">
              Underholdning
-             </option>
-             <option key="Miljø"value="Miljø">
-             Miljø
-             </option>
+             </option>s
              <option key="Sport"value="Sport">
              Sport
              </option>
@@ -120,6 +123,11 @@ class RedigerKomponent extends Component {
             <TextField InputLabelProps={{
                         shrink: true,
                       }}label ="Adresse" name = "adresse" value={this.state.adresse} onChange={this.handleFormChange} /><br/><br/>
+               Legg til bilde som representerer ditt event <br/>
+     <LeggInnBilde 
+     Enr = {this.state.eventer[0]}/>
+        <br />
+        <br />
             <Button type="submit" value="Submit" variant="contained" 
                   color="primary">Submit </Button> 
                   <p>{this.state.respons}</p>

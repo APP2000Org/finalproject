@@ -1,7 +1,8 @@
-/*Laget av Patrick S. Lorentzen
-Denne kode sørger for at alle events */
+/*Laget av Patrick S. Lorentzen - 151685
+og Sondre Reinholdtsen StudNr:225274
+Denne kode sørger for at alle events skrives ut i rad og rekke i alle boksene*/
 
-import React from 'react';
+import React, {useState} from "react";
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -13,10 +14,14 @@ import Typography from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
 import GroupIcon from '@material-ui/icons/Group';
 import EventSide from './popUp/EventSide.jsx';
+import axios from "axios";
+
 
 export default function EventListe(props) {
 
   const [open, setOpen] = React.useState(false);
+
+  const [eventimage, setData] = useState(null);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -29,6 +34,39 @@ export default function EventListe(props) {
   const eventInfo = [props.Enr,props.lagetAv, props.sted,props.tittel,props.dato,props.tilDato,props.adresse,props.klokkeslett,props.beskrivelse,
   props.frontBilde,props.antPåmeldte];
 
+ 
+//Bildestuff
+
+function hentUtBilde (funksjonsnavn, tabellen, kollonen, verdien) {
+  axios({
+    method: "get",
+    url: "https://boeventsphp.000webhostapp.com/hentBilde.php",
+    params: {
+      funksjonsnavn,
+      tabellen,
+      kollonen,
+      verdien,
+    },
+    timeout: 5000,
+  })
+    .then((res) => {
+      setData(res.data);
+
+    })
+    .catch((err) => console.error(err));
+};
+
+//Skriver ut bildet via hentutbildet funksjonen
+
+function skrivutbilde (enr) {
+  hentUtBilde("hentBilde", "arrangementbilder", "Enr", "'" + enr + "'");
+};
+
+skrivutbilde(props.Enr);
+
+var rendretBilde ="data:image/png;base64," + eventimage; 
+
+
 
   return (
     <div>
@@ -38,10 +76,10 @@ export default function EventListe(props) {
           component="img"
           alt="Contemplative Reptile"
           height="140"
-          image = "/iconer/fest.png"//{props.frontBilde}
+          image = {rendretBilde}//{props.frontBilde}
           title="Contemplative Reptile"
         />
-        <img src={"data:image/png;base64," + props.frontBilde}/>
+       
         <CardContent>
         <Typography gutterBottom variant="overline" component="h2">
           {props.dato}
@@ -77,7 +115,8 @@ export default function EventListe(props) {
    innloggetBruker={props.innloggetBruker}
    info = {eventInfo}
    onClose={handleClose}
-   loggUt={props.loggUt}/>
+   loggUt={props.loggUt}
+   bilde = {"data:image/png;base64," + eventimage}/>
   </Dialog>
   </div>
   );
