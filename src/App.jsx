@@ -42,7 +42,7 @@ componentDidUpdate(prevProps, prevState) {
 hentPåmeldtListe = (funksjonsnavn, tabell, kollonen, verdien, where) => {
   axios({
     method: 'get',
-    url: 'https://boeventer.no/index.php',
+    url: 'https://boeventer.no/main.php',
   params: { 
     funksjonsnavn, 
     tabell,
@@ -77,7 +77,7 @@ if(this.state.kriterieListe[0] !== '')
 søkeFeltSøk = (funksjonsnavn, tabell, kollonen, verdien, where) => {
   axios({
     method: 'get',
-    url: 'https://boeventer.no/index.php',
+    url: 'https://boeventer.no/main.php',
   params: { 
     funksjonsnavn, 
     tabell,
@@ -96,7 +96,7 @@ this.setState({eventer: res.data});
 skrivUtAlt = (funksjonsnavn, tabell, kollonen, verdien,where) => {
   axios({
     method: 'get',
-    url: 'https://boeventer.no/index.php',
+    url: 'https://boeventer.no/main.php',
   params: { 
     funksjonsnavn, 
     tabell,

@@ -79,7 +79,7 @@ this.skrivUtVenner("vennOgBruker",this.state.eierInfo,
   skrivUtProfilInfo = (funksjonsnavn, tabell, kollonen, verdien, where) => {
     axios({
       method: "get",
-      url: "https://boeventer.no/index.php",
+      url: "https://boeventer.no/main.php",
       params: {
         funksjonsnavn,
         tabell,
@@ -98,7 +98,7 @@ this.skrivUtVenner("vennOgBruker",this.state.eierInfo,
   skrivUtPåmeldteEvents = (funksjonsnavn, tabell, kollonen, verdien, where) => {
     axios({
       method: "get",
-      url: "https://boeventer.no/index.php",
+      url: "https://boeventer.no/main.php",
       params: {
         funksjonsnavn,
         tabell,
@@ -121,7 +121,7 @@ this.skrivUtVenner("vennOgBruker",this.state.eierInfo,
   skrivUtVenner = (funksjonsnavn, tabell, kollonen, verdien, where) => {
     axios({
       method: "get",
-      url: "https://boeventer.no/index.php",
+      url: "https://boeventer.no/main.php",
       params: {
         funksjonsnavn,
         tabell,
@@ -143,7 +143,7 @@ this.skrivUtVenner("vennOgBruker",this.state.eierInfo,
   slettEvent = (funksjonsnavn, tabell, kollonen, verdien, where) => {
     axios({
       method: "get",
-      url: "https://boeventer.no/index.php",
+      url: "https://boeventer.no/main.php",
       params: {
         funksjonsnavn,
         tabell,
