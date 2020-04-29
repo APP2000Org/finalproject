@@ -205,7 +205,7 @@ export default class NyttEvent extends Component {
     params.append("lat", this.state.lat);
     params.append("lng", this.state.lng);
     axios
-      .post("https://boeventsphp.000webhostapp.com/nyEvent.php", params)
+      .post("https://boeventer.no/nyEvent.php", params)
       .then((res) => {
         //console.log(this.state.selectedFile);
         if (res.data === "") {
@@ -222,7 +222,7 @@ export default class NyttEvent extends Component {
     params.append("Adresse", this.state.adresse);
     params.append("Klokkeslett", this.state.klokkeslett);
     axios
-      .post("https://boeventsphp.000webhostapp.com/nyEvent.php", params)
+      .post("https://boeventer.no/nyEvent.php", params)
       .then((res) => {
         console.log(this.state.selectedFile);
         if (res.data === "") {

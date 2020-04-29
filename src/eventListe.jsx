@@ -40,7 +40,7 @@ export default function EventListe(props) {
 function hentUtBilde (funksjonsnavn, tabellen, kollonen, verdien) {
   axios({
     method: "get",
-    url: "https://boeventsphp.000webhostapp.com/hentBilde.php",
+    url: "https://boeventer.no/hentBilde.php",
     params: {
       funksjonsnavn,
       tabellen,
