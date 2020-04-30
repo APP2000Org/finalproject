@@ -6,9 +6,9 @@ Dette er hovedSiden. Også kjent som MainController. Alt som skjer på siden har
 import React, { Component } from 'react';
 import EventListe from './eventListe.jsx';
 import axios from 'axios';
-import ButtonAppBar from './NavigasjonBar.jsx'
+import ButtonAppBar from './NavigasjonBar.jsx';
 import Grid from '@material-ui/core/Grid';
-import Maps from './GoogleMaps/Maps.jsx';
+import Maps from './GoogleMaps/maps.jsx';
 
 class App extends Component{
 
@@ -42,7 +42,7 @@ componentDidUpdate(prevProps, prevState) {
 hentPåmeldtListe = (funksjonsnavn, tabell, kollonen, verdien, where) => {
   axios({
     method: 'get',
-    url: 'https://boeventsphp.000webhostapp.com/index.php', 
+    url: 'https://boeventer.no/main.php', 
   params: { 
     funksjonsnavn, 
     tabell,
@@ -77,7 +77,7 @@ if(this.state.kriterieListe[0] !== '')
 søkeFeltSøk = (funksjonsnavn, tabell, kollonen, verdien, where) => {
   axios({
     method: 'get',
-    url: 'https://boeventsphp.000webhostapp.com/index.php', 
+    url: 'https://boeventer.no/main.php', 
   params: { 
     funksjonsnavn, 
     tabell,
@@ -96,7 +96,7 @@ this.setState({eventer: res.data});
 skrivUtAlt = (funksjonsnavn, tabell, kollonen, verdien,where) => {
   axios({
     method: 'get',
-    url: 'https://boeventsphp.000webhostapp.com/index.php',  
+    url: 'https://boeventer.no/main.php',  
   params: { 
     funksjonsnavn, 
     tabell,
@@ -116,13 +116,11 @@ this.setState({eventer: res.data});
 sjekkOmInnlogget = ()=> {
   axios({
     method: 'get',
-    url: 'https://boeventsphp.000webhostapp.com/sessionSjekk.php', 
+    url: 'https://boeventer.no/sessionSjekk.php', 
  timeout: 5000
 })
   .then(res =>{
 this.setState({innloggetBrukerInfo: res.data}); 
-console.log("Dette er sjekk innlogging: " + res.data);
-console.log(res);
 })
   .catch(err => console.error(err))
 };

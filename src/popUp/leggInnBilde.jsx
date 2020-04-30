@@ -18,7 +18,7 @@ export default class LeggInnBilde extends Component {
     params.append("frontBildeAdresse", this.state.selectedFile);
     params.append("Enr", this.state.Enr);
     axios
-      .post("https://boeventsphp.000webhostapp.com/leggInnBilde.php", params)
+      .post("https://boeventer.no/leggInnBilde.php", params)
       .then((res) => {
        
         if (res.data === "") {

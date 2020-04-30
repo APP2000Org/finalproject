@@ -55,7 +55,7 @@ class RedigerKomponent extends Component {
           params.append('TilDato', this.state.tilDato);
           params.append('Adresse', this.state.adresse);
           params.append('Klokkeslett', this.state.klokkeslett);
-          axios.post('https://boeventsphp.000webhostapp.com/oppdaterEvent.php', params) 
+          axios.post('https://boeventer.no/oppdaterEvent.php', params) 
           .then(res =>{
             if(this.state.respons===""){
             this.setState({respons:"Event har blitt oppdatert!"}); 

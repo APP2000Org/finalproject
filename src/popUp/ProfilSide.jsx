@@ -17,7 +17,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import AlertDialog from './AlertDialog.jsx';
 import EventSide from './EventSide.jsx';
 import NyttEvent from "./nyttEvent.jsx";
-import RedigerKomponent from './RedigerKomponent.jsx';
+import RedigerKomponent from './redigerKomponent.jsx';
 import CircularProgress from '@material-ui/core/CircularProgress'; 
 
 export default class ProfilSide extends Component {
@@ -79,7 +79,7 @@ this.skrivUtVenner("vennOgBruker",this.state.eierInfo,
   skrivUtProfilInfo = (funksjonsnavn, tabell, kollonen, verdien, where) => {
     axios({
       method: "get",
-      url: "https://boeventsphp.000webhostapp.com/index.php",
+      url: "https://boeventer.no/main.php",
       params: {
         funksjonsnavn,
         tabell,
@@ -98,7 +98,7 @@ this.skrivUtVenner("vennOgBruker",this.state.eierInfo,
   skrivUtPåmeldteEvents = (funksjonsnavn, tabell, kollonen, verdien, where) => {
     axios({
       method: "get",
-      url: "https://boeventsphp.000webhostapp.com/",
+      url: "https://boeventer.no/main.php",
       params: {
         funksjonsnavn,
         tabell,
@@ -121,7 +121,7 @@ this.skrivUtVenner("vennOgBruker",this.state.eierInfo,
   skrivUtVenner = (funksjonsnavn, tabell, kollonen, verdien, where) => {
     axios({
       method: "get",
-      url: "https://boeventsphp.000webhostapp.com/index.php",
+      url: "https://boeventer.no/main.php",
       params: {
         funksjonsnavn,
         tabell,
@@ -143,7 +143,7 @@ this.skrivUtVenner("vennOgBruker",this.state.eierInfo,
   slettEvent = (funksjonsnavn, tabell, kollonen, verdien, where) => {
     axios({
       method: "get",
-      url: "https://boeventsphp.000webhostapp.com/",
+      url: "https://boeventer.no/main.php",
       params: {
         funksjonsnavn,
         tabell,
@@ -304,17 +304,18 @@ fjernVenn = () =>{
   //Skriver ut alle events som den brukeren har laget selv.Hentet fra databsen og puttet i denne arrayen som den går gjennom.
   renderEgeneEvents = () => {
     //this.lagdeEvents();
-    if (this.state.eventer.length > 0) {
-      var nyttEventKnapp = ""; 
-      if(this.state.innloggetBrukerInfo[2] === this.state.eierInfo){
-        nyttEventKnapp = <AlertDialog
-                            enVariant="text"
-                            beskrivelse={<div>Nytt event <AddCircleIcon/></div>}
-                            innhold={<NyttEvent
-                            brukerInfo = {this.state.innloggetBrukerInfo}/>}
-                          />
 
-      }
+    var nyttEventKnapp = ""; 
+    if(this.state.innloggetBrukerInfo[2] === this.state.eierInfo){
+      nyttEventKnapp = <AlertDialog
+                          enVariant="text"
+                          beskrivelse={<div>Nytt event <AddCircleIcon/></div>}
+                          innhold={<NyttEvent
+                          brukerInfo = {this.state.innloggetBrukerInfo}/>}
+                        />
+    }
+
+    if (this.state.eventer.length > 0) {
       return (
       <div>
         <Grid container justify="space-between" alignItems="flex-start" >
@@ -379,7 +380,7 @@ fjernVenn = () =>{
       })}
        </Grid>
        </div>
-    )} else return "Har ikke laget noen events enda!";
+    )} else return (<Grid container justify="space-between"><Grid item>"Har ikke laget noen events enda!"</Grid><Grid item> {nyttEventKnapp}</Grid></Grid>);
   };
 
   //Skriver ut alle venner som er hentet fra databasen. Gjør at man kan åpne og profilen dems.

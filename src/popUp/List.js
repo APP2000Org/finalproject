@@ -137,7 +137,7 @@ class RenderText extends React.Component {
   skrivUt = (funksjonsnavn, tabell, kollonen, verdien, where) => {
     axios({
       method: "get",
-      url: "https://boeventsphp.000webhostapp.com/index.php",
+      url: "https://boeventer.no/main.php",
       params: {
         funksjonsnavn,
         tabell,
@@ -160,7 +160,7 @@ class RenderText extends React.Component {
   hentPåmeldtListe = (funksjonsnavn, tabell, kollonen, verdien, where) => {
     axios({
       method: 'get',
-      url: "https://boeventsphp.000webhostapp.com/index.php", 
+      url: "https://boeventer.no/main.php", 
     params: { 
       funksjonsnavn, 
       tabell,
@@ -323,7 +323,7 @@ class PostKommentar extends React.Component {
   handleSubmit = (funksjonsnavn, tabell, kollonen, verdien, where) => {
     axios({
       method: "get",
-      url: "https://boeventsphp.000webhostapp.com/index.php",
+      url: "https://boeventer.no/main.php",
       params: {
         funksjonsnavn,
         tabell,
@@ -360,7 +360,7 @@ class PostKommentar extends React.Component {
   skrivUtKommentar = (funksjonsnavn, tabell, kollonen, verdien, where) => {
     axios({
       method: "get",
-      url: "https://boeventsphp.000webhostapp.com/",
+      url: "https://boeventer.no/main.php",
       params: {
         funksjonsnavn,
         tabell,

@@ -24,7 +24,7 @@ params.append('fornavn', this.state.fornavn);
 params.append('fodselsdato', this.state.fodselsdato);
 params.append('email', this.state.email);
 params.append('passord', this.state.passord);
-    axios.post('https://boeventsphp.000webhostapp.com/nyBruker.php', params) 
+    axios.post('https://boeventer.no/nyBruker.php', params) 
     .then(res =>{
       this.setState({respons:res.data})
       if(this.state.respons===""){

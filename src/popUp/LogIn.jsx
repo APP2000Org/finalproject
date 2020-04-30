@@ -43,7 +43,7 @@ loggInn = (e) => {
   e.preventDefault(); 
       axios({
         method: 'get',
-        url:"https://boeventsphp.000webhostapp.com/loggInn.php",
+        url:"https://boeventer.no/loggInn.php",
         params: {
           brukernavn:"'" + this.state.fornavn + "'",
           passord: this.state.passord
